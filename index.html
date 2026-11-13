@@ -21,10 +21,10 @@
       background-position: center;
       background-repeat: no-repeat;
       filter: blur(8px);
-      transform: scale(1.06); /* Mencegah tepi putih akibat efek blur */
+      transform: scale(1.06);
     }
 
-    /* Lapisan warna lembut transparan di atas gambar agar tetap nyaman dibaca */
+    /* Lapisan warna lembut transparan di atas gambar */
     .bg-lapisan-warna {
       position: fixed;
       inset: 0;
@@ -44,7 +44,7 @@
   <div class="bg-gambar"></div>
   <div class="bg-lapisan-warna"></div>
 
-  <!-- Header Portal (Tema Pink Muda & Biru Muda Lembut Transparan) -->
+  <!-- Header Portal -->
   <header class="bg-gradient-to-r from-pink-200/85 via-sky-100/85 to-blue-200/85 backdrop-blur-md text-slate-800 shadow-sm border-b border-pink-200/70">
     <div class="max-w-5xl mx-auto px-6 py-9 text-center">
       
@@ -82,7 +82,7 @@
   <!-- Area Daftar Logo Aplikasi -->
   <main class="max-w-5xl w-full mx-auto px-6 py-10 flex-grow">
     <div id="gridAplikasi" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
-      <!-- Kartu aplikasi akan muncul otomatis dari pengaturan JavaScript di bawah -->
+      <!-- Kartu aplikasi muncul otomatis dari daftar di bawah -->
     </div>
     <p id="pesanKosong" class="hidden text-center text-slate-700 font-medium bg-white/80 py-3 px-6 rounded-xl max-w-xs mx-auto mt-8 shadow-sm">
       Aplikasi yang dicari tidak ditemukan.
@@ -194,21 +194,21 @@
         }
 
         kartu.className =
-          "group bg-white/90 backdrop-blur-md rounded-2xl p-6 shadow-md hover:shadow-xl border border-pink-100 hover:border-sky-300 transition-all duration-200 flex flex-col items-center text-center transform hover:-translate-y-1";
+          "group bg-white/90 backdrop-blur-md rounded-2xl p-5 md:p-6 shadow-md hover:shadow-xl border border-pink-100 hover:border-sky-300 transition-all duration-200 flex flex-col items-center text-center transform hover:-translate-y-1";
 
         kartu.innerHTML = `
-          <div class="w-16 h-16 mb-4 rounded-2xl bg-gradient-to-br from-pink-100 to-sky-100 flex items-center justify-center p-3 group-hover:scale-110 transition-transform duration-200 shadow-inner">
+          <div class="w-24 h-24 md:w-28 md:h-28 mb-4 rounded-2xl bg-gradient-to-br from-pink-100 to-sky-100 flex items-center justify-center p-1.5 group-hover:scale-105 transition-transform duration-200 shadow-sm">
             <img 
               src="${sumberLogo}" 
               alt="Logo ${app.nama}" 
-              class="w-full h-full object-contain rounded-lg"
+              class="w-full h-full object-contain rounded-xl"
               onerror="this.src='${ikonCadangan}'"
             />
           </div>
-          <h2 class="font-bold text-slate-800 text-sm md:text-base group-hover:text-pink-600 transition-colors">
+          <h2 class="font-bold text-slate-800 text-base md:text-lg group-hover:text-pink-600 transition-colors leading-snug">
             ${app.nama}
           </h2>
-          <p class="text-xs text-slate-500 mt-1 line-clamp-2">
+          <p class="text-xs text-slate-500 mt-1.5 line-clamp-2">
             ${app.deskripsi}
           </p>
         `;
