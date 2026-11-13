@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMANTITEL SANTIANG - Portal Aplikasi Guru</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Lapisan gambar latar belakang dengan efek blur */
+    .bg-gambar {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image: url('Latarbelakang.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(8px);
+      transform: scale(1.06); /* Mencegah tepi putih akibat efek blur */
+    }
+
+    /* Lapisan warna lembut transparan di atas gambar agar tetap nyaman dibaca */
+    .bg-lapisan-warna {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(
+        135deg,
+        rgba(253, 242, 248, 0.72) 0%,
+        rgba(224, 242, 254, 0.72) 50%,
+        rgba(252, 231, 243, 0.75) 100%
+      );
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between text-slate-800 relative">
+
+  <!-- Elemen Latar Belakang Blur & Lapisan Warna -->
+  <div class="bg-gambar"></div>
+  <div class="bg-lapisan-warna"></div>
+
+  <!-- Header Portal (Tema Pink Muda & Biru Muda Lembut Transparan) -->
+  <header class="bg-gradient-to-r from-pink-200/85 via-sky-100/85 to-blue-200/85 backdrop-blur-md text-slate-800 shadow-sm border-b border-pink-200/70">
+    <div class="max-w-5xl mx-auto px-6 py-9 text-center">
+      
+      <!-- Logo Sekolah di Atas Tengah -->
+      <img 
+        src="logo-sman3.png" 
+        alt="Logo SMA Negeri 3 Bukittinggi" 
+        class="w-24 h-24 md:w-28 md:h-28 mx-auto mb-3 object-contain drop-shadow-md"
+      />
+
+      <span class="inline-block bg-white/85 border border-pink-300 text-sky-900 text-xs font-bold tracking-wider uppercase px-3.5 py-1 rounded-full mb-2 shadow-sm">
+        Portal Layanan Digital Terpadu
+      </span>
+      
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
+        SMANTITEL SANTIANG
+      </h1>
+      
+      <p class="mt-2 text-slate-700 text-sm md:text-base max-w-xl mx-auto font-medium">
+        Satu pintu akses cepat berbagai aplikasi pembelajaran dan administrasi untuk seluruh guru.
+      </p>
+
+      <!-- Kolom Pencarian Aplikasi -->
+      <div class="mt-6 max-w-md mx-auto relative">
+        <input
+          type="text"
+          id="cariAplikasi"
+          placeholder="Cari nama aplikasi..."
+          class="w-full pl-5 pr-4 py-3 rounded-xl text-slate-800 bg-white/95 border border-sky-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400 text-sm"
+        />
+      </div>
+    </div>
+  </header>
+
+  <!-- Area Daftar Logo Aplikasi -->
+  <main class="max-w-5xl w-full mx-auto px-6 py-10 flex-grow">
+    <div id="gridAplikasi" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
+      <!-- Kartu aplikasi akan muncul otomatis dari pengaturan JavaScript di bawah -->
+    </div>
+    <p id="pesanKosong" class="hidden text-center text-slate-700 font-medium bg-white/80 py-3 px-6 rounded-xl max-w-xs mx-auto mt-8 shadow-sm">
+      Aplikasi yang dicari tidak ditemukan.
+    </p>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white/80 backdrop-blur-md border-t border-pink-200/60 py-5 text-center text-xs text-slate-600 font-medium">
+    &copy; 2026 Tim Informatika SMANTITEL SANTIANG - SMA Negeri 3 Bukittinggi.
+  </footer>
+
+  <script>
+    // =========================================================================
+    // PENGATURAN DATA APLIKASI (CUKUP EDIT BAGIAN INI JIKA ADA LINK BERUBAH)
+    // =========================================================================
+    const daftarAplikasi = [
+      {
+        nama: "Rancak-CBT",
+        deskripsi: "Aplikasi CBT Ujian Online",
+        logo: "rancak-cbt.jpeg",
+        link: "https://script.google.com/macros/s/AKfycby8XAwWE6DxBEIEyXwWevvpigsvVBE0ekYzhxkZTMLVlJRj9dZlSi5Nn5Lh1XEZf3ERnQ/exec"
+      },
+      {
+        nama: "Presensi Guru",
+        deskripsi: "Rekap kehadiran kegiatan guru",
+        logo: "",
+        link: "https://s.id/Presensi-Keg-GTK-SMAN3Bkt"
+      },
+      {
+        nama: "Surau Titel",
+        deskripsi: "Sistem Informasi Kegiatan Ibadah Siswa",
+        logo: "",
+        link: "https://s.id/Surau-Titel"
+      },
+      {
+        nama: "Sistem Informasi Keterlambatan Siswa",
+        deskripsi: "Sistem Pencatatan Aplikasi Keterlambatan Siswa",
+        logo: "",
+        link: "https://tinyurl.com/Pres-S-Telat"
+      },
+      {
+        nama: "XskulGO",
+        deskripsi: "Sistem Aplikasi Ekstrakurikuler",
+        logo: "xskul.jpeg",
+        link: "https://s.id/AbsenXkulGoSman3"
+      },
+      {
+        nama: "GIEBEI",
+        deskripsi: "Galeri Investasi Bursa Efek",
+        logo: "giebe.jpeg",
+        link: "https://s.id/GIEBEISMAN3"
+      },
+      {
+        nama: "SSP",
+        deskripsi: "Syabab Syariah Preneur",
+        logo: "ssp.jpeg",
+        link: "https://s.id/SSPSman3"
+      },
+      {
+        nama: "Lab SMANTITEL",
+        deskripsi: "Laboratorium SMA Negeri 3 Bukittinggi",
+        logo: "labor.jpeg",
+        link: ""
+      },
+      {
+        nama: "Puro Berlian",
+        deskripsi: "Sistem Informasi Tabungan SMANTITEL",
+        logo: "",
+        link: "https://s.id/PuroBerlian"
+      },
+      {
+        nama: "Limpapeh Berlian",
+        deskripsi: "Aplikasi Guru Wali",
+        logo: "",
+        link: "https://s.id/AplikasiGuruWali"
+      }
+    ];
+    // =========================================================================
+
+    const gridAplikasi = document.getElementById("gridAplikasi");
+    const inputCari = document.getElementById("cariAplikasi");
+    const pesanKosong = document.getElementById("pesanKosong");
+    const ikonCadangan = "https://cdn-icons-png.flaticon.com/512/1006/1006771.png";
+
+    function tampilkanAplikasi(data) {
+      gridAplikasi.innerHTML = "";
+
+      if (data.length === 0) {
+        pesanKosong.classList.remove("hidden");
+        return;
+      }
+
+      pesanKosong.classList.add("hidden");
+
+      data.forEach((app) => {
+        const adaLink = app.link && app.link.trim() !== "";
+        const sumberLogo = app.logo && app.logo.trim() !== "" ? app.logo.trim() : ikonCadangan;
+
+        const kartu = document.createElement("a");
+        kartu.href = adaLink ? app.link.trim() : "#";
+        if (adaLink) {
+          kartu.target = "_blank";
+          kartu.rel = "noopener noreferrer";
+        } else {
+          kartu.onclick = (e) => {
+            e.preventDefault();
+            alert("Link aplikasi " + app.nama + " belum diisi.");
+          };
+        }
+
+        kartu.className =
+          "group bg-white/90 backdrop-blur-md rounded-2xl p-6 shadow-md hover:shadow-xl border border-pink-100 hover:border-sky-300 transition-all duration-200 flex flex-col items-center text-center transform hover:-translate-y-1";
+
+        kartu.innerHTML = `
+          <div class="w-16 h-16 mb-4 rounded-2xl bg-gradient-to-br from-pink-100 to-sky-100 flex items-center justify-center p-3 group-hover:scale-110 transition-transform duration-200 shadow-inner">
+            <img 
+              src="${sumberLogo}" 
+              alt="Logo ${app.nama}" 
+              class="w-full h-full object-contain rounded-lg"
+              onerror="this.src='${ikonCadangan}'"
+            />
+          </div>
+          <h2 class="font-bold text-slate-800 text-sm md:text-base group-hover:text-pink-600 transition-colors">
+            ${app.nama}
+          </h2>
+          <p class="text-xs text-slate-500 mt-1 line-clamp-2">
+            ${app.deskripsi}
+          </p>
+        `;
+
+        gridAplikasi.appendChild(kartu);
+      });
+    }
+
+    inputCari.addEventListener("input", (e) => {
+      const kataKunci = e.target.value.toLowerCase();
+      const hasilFilter = daftarAplikasi.filter(
+        (app) =>
+          app.nama.toLowerCase().includes(kataKunci) ||
+          app.deskripsi.toLowerCase().includes(kataKunci)
+      );
+      tampilkanAplikasi(hasilFilter);
+    });
+
+    tampilkanAplikasi(daftarAplikasi);
+  </script>
+</body>
+</html>
